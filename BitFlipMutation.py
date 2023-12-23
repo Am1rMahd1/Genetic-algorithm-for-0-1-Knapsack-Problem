@@ -1,7 +1,12 @@
+import random
+
 from MutationOperator import MutationOperator
 
 
 class BitFlipMutation(MutationOperator):
     def mutate(self, individual):
-        # Bit flip mutation implementation
-        return
+        mutation_rate = 0.1
+        mutated_individual = [
+            gene if random.random() > mutation_rate else 1 - gene for gene in individual
+        ]
+        return mutated_individual
