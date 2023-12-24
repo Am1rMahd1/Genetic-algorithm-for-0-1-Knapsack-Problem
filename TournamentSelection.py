@@ -5,6 +5,7 @@ from SelectionOperator import SelectionOperator
 
 class TournamentSelection(SelectionOperator):
     def select(self, population, fitness):
-        tournament_size = 3
-        selected = random.sample(population, tournament_size)
-        return max(selected, key=lambda ind: fitness(ind))
+        tournament_size = 4
+        selected_indices = random.sample(range(len(population)), tournament_size)
+        selected_solution = max(selected_indices, key=lambda idx: fitness[idx])
+        return population[selected_solution]
