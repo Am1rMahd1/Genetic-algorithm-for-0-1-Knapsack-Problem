@@ -9,13 +9,13 @@ class GeneticAlgorithmSolver:
         self.crossover_operator = crossover_operator
         self.mutation_operator = mutation_operator
 
-    def evolve(self, population):
-        fitness_scores = [self.problem_solver.evaluate_fitness(ind) for ind in population]
+    def evolve(self, population, children_in_every_generation):
+        fitness_scores = [self.problem_solver.evaluate_fitness(chromosome) for chromosome in population]
         selected_population = population if self.selection_operator is None else \
             [population[i] for i in self.selection_operator.select(population, fitness_scores)]
 
         new_population = []
-        while len(new_population) < len(population):
+        while len(new_population) < children_in_every_generation:
             parent1, parent2 = random.sample(selected_population, 2)
             child1, child2 = self.crossover_operator.crossover(parent1, parent2)
             child1 = self.mutation_operator.mutate(child1) if self.mutation_operator else child1

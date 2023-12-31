@@ -7,7 +7,7 @@ class KnapsackProblemSolver:
     def is_valid_solution(self, solution):
         total_weight = sum(item.weight * gene for item, gene in zip(self.items, solution))
         total_size = sum(item.size * gene for item, gene in zip(self.items, solution))
-        return total_weight <= self.max_weight #and total_size <= self.max_size
+        return total_weight <= self.max_weight and total_size <= self.max_size
 
     def evaluate_fitness(self, solution):
         if not self.is_valid_solution(solution):
